@@ -147,7 +147,7 @@ const App = () => (
     <Frame>I am text in the center!</Frame>
     <h1>Отримання даних з компоненту</h1>
     <h2>Callback – найкращий варіант</h2>
-    <CallbackFC doSomething={(v)=>alert(v)}/>
+    <CallbackFC doSomething={(text)=>alert(text)}/>
     <Footer copyright="Created by Gastello" />
   </div>
 );
