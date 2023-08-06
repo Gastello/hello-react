@@ -7,6 +7,39 @@ import { JSX } from "react/jsx-runtime";
 
 const reactName = "React";
 
+const NewbieInfo = () => (
+  <>
+    <img src={logo} className="App-logo" alt="logo" />
+    <h1>{"Hello, " + reactName + "!"}</h1>
+    <h1>
+      <i>JavaScript - бібліотека для створення користувацьких інтерфейсів</i>
+    </h1>
+    <h2>Створення проєкту</h2>
+    <p>npx create-react-app myproj --template typescript</p>
+    <h2>Структура проєкту</h2>
+    <img src={require("./images/1.png")} alt="" />
+    <h2>Запуск проєкту для локальної розробки</h2>
+    <p>npm start</p>
+    <h2>Запуск тестів проєкту</h2>
+    <p>npm test</p>
+    <h2>Запуск проєкту для production</h2>
+    <p>npm run build</p>
+    <p>
+      При застосуванні цієї команди проєкт збирається в один файл та
+      мініфікується.
+    </p>
+    <h2>Конвертація create-react-app проєкту в звичайний react</h2>
+    <p>npm run eject</p>
+    <p>
+      Якщо потрібно налаштувати проєкт з нуля під себе, то використовується ця
+      команда.
+    </p>
+    <img src={require("./images/2.png")} alt="" />
+    <h2>Використання змінних у коді</h2>
+    <img src={require("./images/3.png")} alt="" />
+  </>
+);
+
 class Timer extends PureComponent {
   state = { time: 0 };
   _timeIncrease = () => {
@@ -85,36 +118,21 @@ const Frame: FC<FrameProps> = (props) => {
   );
 };
 
+type CallbackProps = {
+  doSomething: (text: string) => void;
+};
+
+const CallbackFC: FC<CallbackProps> = (props) => {
+  return (
+    <button onClick={()=>props.doSomething("some magic power.")}>
+      Click on me to feel the power of getting data from component!
+    </button>
+  );
+};
+
 const App = () => (
   <div className="App">
-    <img src={logo} className="App-logo" alt="logo" />
-    <h1>{"Hello, " + reactName + "!"}</h1>
-    <h1>
-      <i>JavaScript - бібліотека для створення користувацьких інтерфейсів</i>
-    </h1>
-    <h2>Створення проєкту</h2>
-    <p>npx create-react-app myproj --template typescript</p>
-    <h2>Структура проєкту</h2>
-    <img src={require("./images/1.png")} alt="" />
-    <h2>Запуск проєкту для локальної розробки</h2>
-    <p>npm start</p>
-    <h2>Запуск тестів проєкту</h2>
-    <p>npm test</p>
-    <h2>Запуск проєкту для production</h2>
-    <p>npm run build</p>
-    <p>
-      При застосуванні цієї команди проєкт збирається в один файл та
-      мініфікується.
-    </p>
-    <h2>Конвертація create-react-app проєкту в звичайний react</h2>
-    <p>npm run eject</p>
-    <p>
-      Якщо потрібно налаштувати проєкт з нуля під себе, то використовується ця
-      команда.
-    </p>
-    <img src={require("./images/2.png")} alt="" />
-    <h2>Використання змінних у коді</h2>
-    <img src={require("./images/3.png")} alt="" />
+    <NewbieInfo />
     <h1>Компоненти</h1>
     <Timer />
     <h1>Хуки</h1>
@@ -127,6 +145,9 @@ const App = () => (
     <Line color="grey" width="70%" height="5px"></Line>
     <h2>Передача компонента як аргумент</h2>
     <Frame>I am text in the center!</Frame>
+    <h1>Отримання даних з компоненту</h1>
+    <h2>Callback – найкращий варіант</h2>
+    <CallbackFC doSomething={(v)=>alert(v)}/>
     <Footer copyright="Created by Gastello" />
   </div>
 );
