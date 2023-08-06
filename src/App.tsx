@@ -1,5 +1,5 @@
 import React from "react";
-import { PureComponent, useState, FC } from "react";
+import { PureComponent, useState, FC, PropsWithChildren } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 import { Footer } from "./Footer";
@@ -45,11 +45,46 @@ const Circle: FC<CircleProps> = (props) => {
         height: props.radius,
         opacity: props.opacity,
         borderRadius: "50%",
-        margin: "20px auto", 
+        margin: "20px auto",
       }}
     ></div>
   );
 };
+
+type LineProps = { height: string; width: string; color: string };
+class Line extends PureComponent<LineProps> {
+  render() {
+    return (
+      <div
+        style={{
+          height: this.props.height,
+          width: this.props.width,
+          backgroundColor: this.props.color,
+          margin: "30px auto",
+        }}
+      ></div>
+    );
+  }
+}
+
+type FrameProps = PropsWithChildren<{}>;
+
+const Frame: FC<FrameProps> = (props) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        height: "300px",
+        alignItems: "center",
+        justifyContent: "center",
+        border: "5px yellow dashed",
+      }}
+    >
+      {props.children}
+    </div>
+  );
+};
+
 const App = () => (
   <div className="App">
     <img src={logo} className="App-logo" alt="logo" />
@@ -89,6 +124,9 @@ const App = () => (
     <Circle color="red" radius={200} opacity={0.4}></Circle>
     <Circle color="yellow" radius={200} opacity={0.4}></Circle>
     <Circle color="green" radius={200} opacity={1}></Circle>
+    <Line color="grey" width="70%" height="5px"></Line>
+    <h2>Передача компонента як аргумент</h2>
+    <Frame>I am text in the center!</Frame>
     <Footer copyright="Created by Gastello" />
   </div>
 );
