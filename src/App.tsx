@@ -1,41 +1,59 @@
 import React from "react";
-import { PureComponent } from "react";
+import { PureComponent, useState, FC } from "react";
 import "./App.css";
 import logo from "./logo.svg";
 import { Footer } from "./Footer";
 import { JSX } from "react/jsx-runtime";
 
+const reactName = "React";
+
 class Timer extends PureComponent {
   state = { time: 0 };
   _timeIncrease = () => {
-    setInterval(()=>{this.setState({ time: this.state.time + 1 })}, 1000)
+    setInterval(() => {
+      this.setState({ time: this.state.time + 1 });
+    }, 1000);
   };
   render() {
-    return this.state.time===0?<div><button onClick={this._timeIncrease}>Start Timer</button></div>:<div>Time: {this.state.time} seconds</div>;
-  }
-}
-
-class BtnWithCounter extends PureComponent {
-  state = { counter: 0 };
-  private _increment = () => { 
-    this.setState({ counter: this.state.counter + 1 })};
-
-  render() {
-    return (
+    return this.state.time === 0 ? (
       <div>
-      <button onClick={this._increment}>
-        Clicked: {this.state.counter} times
-      </button>
+        <button onClick={this._timeIncrease}>Start Timer</button>
       </div>
+    ) : (
+      <div>Time: {this.state.time} seconds</div>
     );
   }
 }
-const reactName = "React"
+const BtnWithCounter = () => {
+  const [counter, setCounter] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCounter(counter + 1)}>
+        Clicked: {counter} times
+      </button>
+    </div>
+  );
+};
 
+type CircleProps = { color: string; radius: number; opacity: number };
+const Circle: FC<CircleProps> = (props) => {
+  return (
+    <div
+      style={{
+        backgroundColor: props.color,
+        width: props.radius,
+        height: props.radius,
+        opacity: props.opacity,
+        borderRadius: "50%",
+        margin: "20px auto", 
+      }}
+    ></div>
+  );
+};
 const App = () => (
   <div className="App">
     <img src={logo} className="App-logo" alt="logo" />
-    <h1>{"Hello, " + reactName+"!"}</h1>
+    <h1>{"Hello, " + reactName + "!"}</h1>
     <h1>
       <i>JavaScript - бібліотека для створення користувацьких інтерфейсів</i>
     </h1>
@@ -62,8 +80,15 @@ const App = () => (
     <img src={require("./images/2.png")} alt="" />
     <h2>Використання змінних у коді</h2>
     <img src={require("./images/3.png")} alt="" />
+    <h1>Компоненти</h1>
     <Timer />
+    <h1>Хуки</h1>
     <BtnWithCounter />
+    <h1>Передача аргументів у компонент</h1>
+    <h2>Props</h2>
+    <Circle color="red" radius={200} opacity={0.4}></Circle>
+    <Circle color="yellow" radius={200} opacity={0.4}></Circle>
+    <Circle color="green" radius={200} opacity={1}></Circle>
     <Footer copyright="Created by Gastello" />
   </div>
 );
