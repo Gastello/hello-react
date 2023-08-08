@@ -171,6 +171,25 @@ const CallbackFC: FC<CallbackProps> = (props) => {
   );
 };
 
+type GetColorButtonProps = {
+  getColor: (color: string) => void,
+}
+const GetColorButton: FC<GetColorButtonProps> = (props) => {
+  const myColor = 'green';
+  return (
+    <button 
+    onClick={()=>{
+      props.getColor("I am " + myColor);
+    }}
+    style={{
+      backgroundColor: "green",
+      padding: 20,
+      color: 'white',
+    }}>
+      Click on me to find out the truth!
+    </button>
+  )
+}
 const App = () => (
   <div className="App">
     <NewbieInfo />
@@ -189,6 +208,8 @@ const App = () => (
     <H1 text="Отримання даних з компоненту" isCursive={false}></H1>
     <H2 text="Callback – найкращий варіант"/>
     <CallbackFC doSomething={(text) => alert(text)} />
+    <Line color="grey" width="70%" height="5px"></Line> 
+    <GetColorButton getColor={(color)=>alert(color)}/>
     <Footer copyright="Created by Gastello" />
   </div>
 );
